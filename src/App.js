@@ -5,6 +5,8 @@ import Login from "./Components/Login";
 import Menu from './Components/Menu';
 import Register from './Components/Register';
 import Fundtransfer from './Components/Fundtransfer';
+import Newfd from './Components/Newfd';
+import Atmpin from './Components/Atmpin';
 function App() {
   return (
     <>
@@ -15,6 +17,10 @@ function App() {
           <Route path='/register' element={<Register/>}></Route>
           <Route path='/menu' element={<Menu/>}></Route>
           <Route path='/fundtransfer' element={<Fundtransfer/>}></Route>
+          <Route path='/newfd' element={<Newfd/>}></Route>
+          <Route path='/atmpin' element={<Atmpin/>}></Route>
+
+
           
         </Routes>
       </Router>
