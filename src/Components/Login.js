@@ -38,6 +38,9 @@ const Login = () => {
     setFormErrors(validateForm({userid,password}));
     setIsSubmit(true);
   };
+  const registerHandler = (e) => {
+   navigate("/register")
+  };
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
@@ -53,7 +56,7 @@ const Login = () => {
   return (
     <Container className="p-4">
       <h2 className="text-center py-3">Login</h2>
-      <Form onSubmit={loginHandler}>
+      <Form>
         <FormGroup row>
           <Col lg={3}></Col>
           <Label for="userid" sm={3} lg={2}>
@@ -99,7 +102,8 @@ const Login = () => {
         </FormGroup>
         <FormGroup check row>
           <Col className="d-flex justify-content-center">
-            <Button>Submit</Button>
+            <Button onClick={loginHandler} className="m-3">Submit</Button>
+            <Button onClick={registerHandler} className="m-3">Register</Button>
           </Col>
         </FormGroup>
       </Form>
