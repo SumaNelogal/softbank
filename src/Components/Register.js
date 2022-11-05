@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import {
   Container,
@@ -14,6 +15,12 @@ import {
 } from "reactstrap";
 
 const Register = () => {
+  const navigate = useNavigate();
+
+  const registerHandler = (e) => {
+    alert("registration sucess.. login");
+    navigate("/login",{replace:true})
+   };
     const [name, setname] = useState("");
     const [middlename, setmiddlename] = useState("");
     const [lastname, setlastname] = useState("");
@@ -187,7 +194,7 @@ const Register = () => {
         </FormGroup>
         <FormGroup check row>
           <Col className="d-flex justify-content-center">
-            <Button>Register</Button>
+            <Button onClick={registerHandler} >Register</Button>
           </Col>
         </FormGroup>
       </Form>

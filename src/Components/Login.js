@@ -34,22 +34,24 @@ const Login = () => {
   };
 
   const loginHandler = (e) => {
+    
     e.preventDefault();
     setFormErrors(validateForm({userid,password}));
     setIsSubmit(true);
   };
   const registerHandler = (e) => {
-   navigate("/register")
+   navigate("/register",{replace:true})
   };
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       if(userid==="user" && password==="user"){
+        alert("login success..");
         navigate("/menu");
         
       }
       else{
-        navigate("/register");
+        alert("Invalid please register..");
       }
     }
   }, [formErrors]);
@@ -102,7 +104,7 @@ const Login = () => {
         </FormGroup>
         <FormGroup check row>
           <Col className="d-flex justify-content-center">
-            <Button onClick={loginHandler} className="m-3">Submit</Button>
+            <Button onClick={loginHandler} className="m-3">login</Button>
             <Button onClick={registerHandler} className="m-3">Register</Button>
           </Col>
         </FormGroup>
