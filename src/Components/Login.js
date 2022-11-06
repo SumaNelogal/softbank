@@ -37,6 +37,7 @@ const Login = () => {
     
     e.preventDefault();
     setFormErrors(validateForm({username,password}));
+
     if(Object.keys(formErrors).length===0){
     axios.post("http://localhost:8080/api/v1/login", {username,password}).then((res) => {
         console.log(res.data);
@@ -45,8 +46,8 @@ const Login = () => {
           navigate("/menu");
         } 
         else alert("Invalid Login Please Register");
-      });
-    }
+      })
+    };
     setIsSubmit(true);
   };
   const registerHandler = (e) => {
