@@ -17,10 +17,8 @@ import {
 const Register = () => {
   const navigate = useNavigate();
 
-  const registerHandler = (e) => {
-    alert("registration sucess.. login");
-    navigate("/login",{replace:true})
-   };
+  
+    const [accountnumber, setaccountnumber] = useState();
     const [name, setname] = useState("");
     const [middlename, setmiddlename] = useState("");
     const [lastname, setlastname] = useState("");
@@ -28,12 +26,46 @@ const Register = () => {
     const [password, setpassword] = useState("");
     const [securityquestion,setsecurityquestion] = useState("");
     const [securityanswer,setsecurityanswer]=useState("")
-    const [selectaccounttype,setselectaccounttype]=useState("")
+    const [accounttype,setaccounttype]=useState("")
+    const [isSubmit,setIsSubmit]=useState(false);
 
+    const registerHandler = (e) => {
+      e.preventDefault();
+      console.log("account"+accounttype+" "+middlename);
+      const user={accountnumber,name,middlename,lastname,username,password,securityquestion,securityanswer,accounttype};
+      console.log(user);
+      // setIsSubmit(true);
+      axios.post("http://localhost:8080/api/v1/register",user).then((res)=>{
+          if(res.data){
+            alert("registered successfully,,,");
+            navigate("/login");
+          }
+        })
+     };
+    
   return (
     <Container className="p-4">
       <h2 className="text-center py-3">Registration Page</h2>
-      <Form>
+      <Form onSubmit={registerHandler}>
+      <FormGroup row>
+          <Col lg={3}></Col>
+          <Label for="accountnumber" sm={3} lg={2}>
+            Account Number
+          </Label>
+          <Col sm={9} lg={4}>
+            <Input
+              id="accountnumber"
+              name="accountnumber"
+              placeholder="Enter your acc no"
+              value={accountnumber}
+              onChange={(e)=>{
+                setaccountnumber(e.target.value);
+              }}
+              type="text"
+            />
+          </Col>
+          <Col lg={3}></Col>
+        </FormGroup>
         <FormGroup row>
           <Col lg={3}></Col>
           <Label for="name" sm={3} lg={2}>
@@ -53,6 +85,7 @@ const Register = () => {
           </Col>
           <Col lg={3}></Col>
         </FormGroup>
+        
         <FormGroup row>
           <Col lg={3}></Col>
           <Label for="middlename" sm={3} lg={2}>
@@ -67,6 +100,7 @@ const Register = () => {
               value={middlename}
               onChange={(e)=>{
                 setmiddlename(e.target.value);
+                {{console.log(middlename)}}
               }}
               type="text"
             />
@@ -176,12 +210,12 @@ const Register = () => {
         </FormGroup>
         <FormGroup row>
           <Col lg={3}></Col>
-          <Label for="selectaccounttype" sm={3} lg={2}>
+          <Label for="accounttype" sm={3} lg={2}>
           Select Account Type
           </Label>
 
           <Col sm={9} lg={4}>
-          <select id="Select Account Type" onChange={(e)=>setselectaccounttype(e.target.value)} style={{width:"100%",padding:"7px",borderRadius:"5px"}}>
+          <select id="accounttype" name='accounttype' onChange={(e)=>setaccounttype(e.target.value)} style={{width:"100%",padding:"7px",borderRadius:"5px"}}>
                     <option value="select account type">select account type</option>
                     <option value="current account" >current account</option>
                     <option value="savings account">savings account</option>
@@ -194,7 +228,7 @@ const Register = () => {
         </FormGroup>
         <FormGroup check row>
           <Col className="d-flex justify-content-center">
-            <Button onClick={registerHandler} >Register</Button>
+            <Button >Register</Button>
           </Col>
         </FormGroup>
       </Form>

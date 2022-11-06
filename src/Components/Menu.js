@@ -15,25 +15,33 @@ const Menu = () => {
    const eventHandler = (e) => {
     navigate("/events")
    };
+   const atmHandler = (e) => {
+    navigate("/atmpin")
+   };
    const logoutHandler = (e) => {
+    alert("logged out successfully..");
     navigate("/login")
    };
 
   return (
-    <Container style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
-      <Button color="warning" size="md" className="m-5"  style={{width:"500px"}}>
+    <Container className="p-5" style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
+      
+      <Button color="warning" size="md" className="m-3"  style={{width:"400px"}}>
      <b>Check Balance</b>
       </Button>
-      <Button onClick={registerHandler} color="warning" size="md" className="m-5" style={{width:"500px"}}>
+      <Button onClick={registerHandler} color="warning" size="md" className="m-3" style={{width:"400px"}}>
         <b>Fund Transfer</b>
       </Button>
-      <Button onClick={newfdHandler} color="warning" size="md" className="m-5" style={{width:"500px"}}>
+      <Button onClick={newfdHandler} color="warning" size="md" className="m-3" style={{width:"400px"}}>
         <b>Open New FD</b>
       </Button>
-      <Button onClick={eventHandler} color="warning" size="md" className="m-5" style={{width:"500px"}}>
+      <Button onClick={eventHandler} color="warning" size="md" className="m-3" style={{width:"400px"}}>
         <b>Events</b>
       </Button>
-      <Button onClick={logoutHandler} color="warning" size="md" className="m-5" style={{width:"500px"}}>
+      <Button onClick={atmHandler} color="warning" size="md" className="m-3" style={{width:"400px"}}>
+        <b>Change ATM Pin</b>
+      </Button>
+      <Button onClick={logoutHandler} color="warning" size="md" className="m-3" style={{width:"400px"}}>
        <b> Logout</b>
       </Button>
 

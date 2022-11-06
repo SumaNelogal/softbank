@@ -55,7 +55,7 @@ const Atmpin = () => {
                   onChange={(e)=>{
                     setnewpin(e.target.value);
                   }}
-                  type="text"
+                  type="password"
                 />
               </Col>
               <Col lg={3}></Col>
@@ -75,7 +75,7 @@ const Atmpin = () => {
                   onChange={(e)=>{
                     setconfirmpin(e.target.value);
                   }}
-                  type="text"
+                  type="password"
                 />
               </Col>
               <Col lg={3}></Col>

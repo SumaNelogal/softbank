@@ -19,13 +19,13 @@ const Login = () => {
   const [isSubmit, setIsSubmit] = useState(false);
   
   const [password, setpassword] = useState("");
-  const [userid, setuserid] = useState("");
+  const [username, setusername] = useState("");
 
   
   const validateForm = (values) => {
     const error = {};
-    if (!values.userid) {
-      error.userid = "Email is required";
+    if (!values.username) {
+      error.username = "Email is required";
     } 
     if (!values.password) {
       error.password = "Password is required";
@@ -36,46 +36,47 @@ const Login = () => {
   const loginHandler = (e) => {
     
     e.preventDefault();
-    setFormErrors(validateForm({userid,password}));
+    setFormErrors(validateForm({username,password}));
+    if(Object.keys(formErrors).length===0){
+    axios.post("http://localhost:8080/api/v1/login", {username,password}).then((res) => {
+        console.log(res.data);
+      
+        if (res.data) {
+          navigate("/menu");
+        } 
+        else alert("Invalid Login Please Register");
+      });
+    }
     setIsSubmit(true);
   };
   const registerHandler = (e) => {
    navigate("/register",{replace:true})
   };
 
-  useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      if(userid==="user" && password==="user"){
-        alert("login success..");
-        navigate("/menu");
-        
-      }
-      else{
-        alert("Invalid please register..");
-      }
-    }
-  }, [formErrors]);
+
+
+
   return (
     <Container className="p-4">
       <h2 className="text-center py-3">Login</h2>
-      <Form>
+      <Form onSubmit={loginHandler}>
         <FormGroup row>
           <Col lg={3}></Col>
-          <Label for="userid" sm={3} lg={2}>
-            User Id
+          <Label for="username" sm={3} lg={2}>
+            User Name
           </Label>
           <Col sm={9} lg={4}>
             <Input
-              id="userid"
-              name="userid"
-              placeholder="Enter your User id"
-              value={userid}
+              id="username"
+              name="username"
+              placeholder="Enter your User name"
+              value={username}
               onChange={(e)=>{
-                setuserid(e.target.value);
+                setusername(e.target.value);
               }}
               type="text"
             />
-            <p style={{ color: "red" }}>{formErrors.userid}</p>
+            <p style={{ color: "red" }}>{formErrors.username}</p>
           </Col>
           <Col lg={3}></Col>
         </FormGroup>
@@ -104,7 +105,7 @@ const Login = () => {
         </FormGroup>
         <FormGroup check row>
           <Col className="d-flex justify-content-center">
-            <Button onClick={loginHandler} className="m-3">login</Button>
+            <Button className="m-3">login</Button>
             <Button onClick={registerHandler} className="m-3">Register</Button>
           </Col>
         </FormGroup>
