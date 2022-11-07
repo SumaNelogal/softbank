@@ -14,17 +14,33 @@ import {
 } from "reactstrap";
 
 const Newfd = () => {
-    const [fromaccount, setfromaccount] = useState("");
+  const navigate = useNavigate();
+
+    const [fromaccount, setfromaccount] = useState();
     const [fdperiod, setfdperiod] = useState("");
     const [amount,setamount] = useState("");
     const [fdproduct,setfdproduct]=useState("")
+
+
+    const fdHandler = (e) => {
+      e.preventDefault();
+      const fd={fromaccount,amount,fdperiod,fdproduct};
+      // setIsSubmit(true);
+      axios.post("http://localhost:8080/api/v1/newfd",fd).then((res)=>{
+          if(res.data){
+            console.log("entered")
+            alert("created successfully,,,");
+            navigate("/menu");
+          }
+        })
+     };
     
 
   return (
     <Container className="p-4">
         <h2 className="text-center py-3">Open New FD</h2>
       
-      <Form>
+      <Form onSubmit={fdHandler}>
         <FormGroup row>
           <Col lg={3}></Col>
           <Label for="fromaccount" sm={3} lg={2}>

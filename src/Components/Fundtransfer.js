@@ -15,7 +15,7 @@ import {
 
 const Fundtransfer = () => {
   const navigate = useNavigate();
-    const [fromaccount, setfromaccount] = useState("");
+    const [fromaccount, setfromaccount] = useState();
     const [benificiary, setbenificiary] = useState("");
     const [benificiaryaccount, setbenificiaryaccount] = useState("");
     const [benificiaryifsccode, setbenificiaryifsccode] = useState("");
