@@ -14,19 +14,34 @@ import {
 } from "reactstrap";
 
 const Event = () => {
+  const navigate = useNavigate();
+
     const [name, setname] = useState("");
     const [address, setaddress] = useState("");
     const [mobileno, setmobileno] = useState("");
     const [emailid, setemailid] = useState("");
     const [gender, setgender] = useState("");
     const [event,setevent] = useState("");
+
+    const eventHandler = (e) => {
+      e.preventDefault();
+      const fd={name,address,mobileno,emailid,gender,event};
+      // setIsSubmit(true);
+      axios.post("http://localhost:8080/api/v1/events",fd).then((res)=>{
+          if(res.data){
+            console.log("entered")
+            alert("registered successfully,,,");
+            navigate("/menu");
+          }
+        })
+     };
     
     
 
   return (
     <Container className="p-4">
       <h2 className="text-center py-3">Event registration Page</h2>
-      <Form>
+      <Form onSubmit={eventHandler}>
         <FormGroup row>
           <Col lg={3}></Col>
           <Label for="name" sm={3} lg={2}>
