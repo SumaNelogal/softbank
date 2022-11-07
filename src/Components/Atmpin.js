@@ -14,13 +14,35 @@ import {
 } from "reactstrap";
 
 const Atmpin = () => {
+  const navigate = useNavigate();
+
     const [oldpin, setoldpin] = useState("");
     const [newpin, setnewpin] = useState("");
     const [confirmpin, setconfirmpin] = useState("");
+    const [pinwrong,setpinwrong]=useState("");
+    const atmHandler = (e) => {
+      e.preventDefault();
+      const fd={oldpin,newpin,confirmpin};
+      // setIsSubmit(true);
+      if(newpin===confirmpin){
+      axios.post("http://localhost:8080/api/v1/atm",fd).then((res)=>{
+          if(res.data){
+
+            
+              alert("changed successfully,,,");
+            navigate("/menu");
+
+            
+            
+          }
+
+        })
+      }else{setpinwrong("Does not match")}
+     };
     return (
         <Container className="p-4">
           <h2 className="text-center py-3">Change ATM Pin</h2>
-          <Form>
+          <Form onSubmit={atmHandler}>
             <FormGroup row>
               <Col lg={3}></Col>
               <Label for="oldpin" sm={3} lg={2}>
@@ -77,6 +99,7 @@ const Atmpin = () => {
                   }}
                   type="password"
                 />
+                <p style={{ color: "red" }}>{pinwrong}</p>
               </Col>
               <Col lg={3}></Col>
             </FormGroup>
