@@ -9,7 +9,8 @@ import Atmpin from './Components/Atmpin';
 import Event from './Components/Events';
 import AdminLogin from './Components/AdminLogin';
 import ViewUser from './Components/ViewUser';
-import { CheckBalance } from './Components/CheckBalance';
+import { CheckDetails } from './Components/CheckDetails';
+import TransactionList from './Components/TransactionList';
 
 
 
@@ -29,8 +30,8 @@ function App() {
           <Route path='/events' element={<Event/>}></Route>
           <Route path='/viewuser' element={<ViewUser/>}></Route>
           <Route path='/adminlogin' element={<AdminLogin/>}></Route>
-          <Route path='/checkbalance' element={<CheckBalance/>}></Route>
-
+          <Route path='/checkdetails' element={<CheckDetails/>}></Route>
+          <Route path='/transactionList' element={<TransactionList/>}></Route>
 
 
         

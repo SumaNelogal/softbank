@@ -6,6 +6,10 @@ import { useNavigate } from "react-router-dom";
 const Menu = () => {
 
   const navigate = useNavigate();
+
+  const balanceHandler = (e) => {
+    navigate("/checkdetails")
+   };
   const registerHandler = (e) => {
     navigate("/fundtransfer")
    };
@@ -26,8 +30,8 @@ const Menu = () => {
   return (
     <Container className="p-5" style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
       
-      <Button color="warning" size="md" className="m-3"  style={{width:"400px"}}>
-     <b>Check Balance</b>
+      <Button onClick={balanceHandler}color="warning" size="md" className="m-3"  style={{width:"400px"}}>
+     <b>Check Details</b>
       </Button>
       <Button onClick={registerHandler} color="warning" size="md" className="m-3" style={{width:"400px"}}>
         <b>Fund Transfer</b>
