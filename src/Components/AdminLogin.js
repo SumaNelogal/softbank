@@ -12,7 +12,7 @@ import {
   Button,
 } from "reactstrap";
 
-const Login = () => {
+const AdminLogin = () => {
     
   const navigate = useNavigate();
   const [formErrors, setFormErrors] = useState({});
@@ -22,7 +22,7 @@ const Login = () => {
   const [username, setusername] = useState("");
 
   
-  const validateForm = (values) => {
+  const validateAForm = (values) => {
     const error = {};
     if (!values.username) {
       error.username = "Email is required";
@@ -34,38 +34,32 @@ const Login = () => {
   };
 
   function populateStorage(username) {
-    window.localStorage.setItem('sessionId', username);
+    window.localStorage.setItem('adminsessionId', username);
   }
 
   const loginHandler = (e) => {
+
     
     e.preventDefault();
-    setFormErrors(validateForm({username,password}));
+    setFormErrors(validateAForm({username,password}));
 
     if(Object.keys(formErrors).length===0){
-    axios.post("http://localhost:8080/api/v1/login", {username,password}).then((res) => {
+    axios.post("http://localhost:8080/api/v1/adminlogin", {username,password}).then((res) => {
         console.log(res.data);
         populateStorage(username);
-
-      
+        
         if (res.data) {
-          navigate("/menu");
+          navigate("/users");
         } 
         else alert("Invalid Login Please Register");
       })
     };
     setIsSubmit(true);
   };
-  const registerHandler = (e) => {
-   navigate("/register",{replace:true})
-  };
-
-
-
 
   return (
     <Container className="p-4">
-      <h2 className="text-center py-3">Login</h2>
+      {/* <h2 className="text-center py-3">Admin Login</h2> */}
       <Form onSubmit={loginHandler}>
         <FormGroup row>
           <Col lg={3}></Col>
@@ -79,6 +73,7 @@ const Login = () => {
               placeholder="Enter your User name"
               value={username}
               onChange={(e)=>{
+                
                 setusername(e.target.value);
               }}
               type="text"
@@ -113,7 +108,6 @@ const Login = () => {
         <FormGroup check row>
           <Col className="d-flex justify-content-center">
             <Button className="m-3">login</Button>
-            <Button onClick={registerHandler} className="m-3">Register</Button>
           </Col>
         </FormGroup>
       </Form>
@@ -121,4 +115,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default AdminLogin
